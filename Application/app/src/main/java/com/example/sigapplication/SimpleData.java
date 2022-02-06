@@ -1,0 +1,43 @@
+package com.example.sigapplication;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SimpleData implements Parcelable {
+    int code;
+    String message;
+
+    // 외부에서 사용하는 생성자
+    public SimpleData(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    // CREATOR가 사용하는 생성자
+    public SimpleData(Parcel src) {
+        code = src.readInt();
+        message = src.readString();
+    }
+
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        // Parcel 안에 있는거 가지고 SimpleData를 만든다는 의미.
+        public SimpleData createFromParcel(Parcel in) {
+            return new SimpleData(in);
+        }
+        public SimpleData[] newArray(int size) {
+            return new SimpleData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(code);
+        dest.writeString(message);
+    }
+}

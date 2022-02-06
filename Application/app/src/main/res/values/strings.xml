@@ -3,6 +3,7 @@
     <string name="id">아이디</string>
     <string name="button_done">결과확인</string>
     <string name="edit_hint">증상을 입력하세요.</string>
+    <string name="button_remove">모두지우기</string>
 
     <string name="toast">증상을 입력하세요.</string>
 

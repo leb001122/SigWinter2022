@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/black_radius.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/drawable/border_layout.xml" value="0.154907795721896" />
+        <entry key="app/src/main/res/drawable/border_textview.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/drawable/borderline.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/drawable/button_round.xml" value="0.199184477776584" />
         <entry key="app/src/main/res/drawable/button_round2.xml" value="0.23489583333333333" />
@@ -15,7 +17,13 @@
         <entry key="app/src/main/res/layout/activity_loding.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/activity_symptom_input.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/layout/fragment_third.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/layout/page1.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/layout/test.xml" value="0.30833333333333335" />
       </map>
     </option>
   </component>
