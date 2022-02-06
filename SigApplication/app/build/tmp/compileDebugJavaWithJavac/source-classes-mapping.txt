@@ -1,0 +1,35 @@
+com/example/sigapplication/AiResult.java
+ com.example.sigapplication.AiResult
+com/example/sigapplication/databinding/ActivityLodingBinding.java
+ com.example.sigapplication.databinding.ActivityLodingBinding
+com/example/sigapplication/databinding/ActivityAiResultBinding.java
+ com.example.sigapplication.databinding.ActivityAiResultBinding
+com/example/sigapplication/SimpleData.java
+ com.example.sigapplication.SimpleData
+ com.example.sigapplication.SimpleData$1
+com/example/sigapplication/ResultFragment.java
+ com.example.sigapplication.ResultFragment
+ com.example.sigapplication.ResultFragment$1
+com/example/sigapplication/databinding/FragmentResultBinding.java
+ com.example.sigapplication.databinding.FragmentResultBinding
+com/example/sigapplication/SymptomInput.java
+ com.example.sigapplication.SymptomInput
+ com.example.sigapplication.SymptomInput$1
+ com.example.sigapplication.SymptomInput$2
+com/example/sigapplication/BuildConfig.java
+ com.example.sigapplication.BuildConfig
+com/example/sigapplication/ResultFragment2.java
+ com.example.sigapplication.ResultFragment2
+ com.example.sigapplication.ResultFragment2$1
+com/example/sigapplication/databinding/FragmentResult2Binding.java
+ com.example.sigapplication.databinding.FragmentResult2Binding
+com/example/sigapplication/LodingActivity.java
+ com.example.sigapplication.LodingActivity
+ com.example.sigapplication.LodingActivity$1
+com/example/sigapplication/databinding/ActivityMainBinding.java
+ com.example.sigapplication.databinding.ActivityMainBinding
+com/example/sigapplication/MainActivity.java
+ com.example.sigapplication.MainActivity
+ com.example.sigapplication.MainActivity$1
+com/example/sigapplication/databinding/ActivitySymptomInputBinding.java
+ com.example.sigapplication.databinding.ActivitySymptomInputBinding
