@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<MyQuestion> questions;
     private MyQuestionAdapter adapter;
     Button btnAdd;
-    DBHelper helper;
     SQLiteDatabase db;
 
     @Override
@@ -33,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.btn_question_add);
         listView = (ListView) findViewById(R.id.listview);
         questions = new ArrayList<MyQuestion>();
-        helper = new DBHelper(MainActivity.this, "sigdb.db", null, 1);
-        db = helper.getWritableDatabase();
-        helper.onCreate(db);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
