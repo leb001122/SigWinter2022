@@ -57,7 +57,7 @@ public class SymptomInput extends AppCompatActivity {
         });
     }
 
-    @Override
+/*    @Override
     protected void onPause() {
         super.onPause();
         saveState();
@@ -84,5 +84,5 @@ public class SymptomInput extends AppCompatActivity {
             String text = pref.getString("text", "");
             editText.setText(text);
         }
-    }
+    }*/
 }

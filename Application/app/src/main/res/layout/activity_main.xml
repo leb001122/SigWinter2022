@@ -54,41 +54,24 @@
             />
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_question_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/my_questions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@id/my_questions"
-            android:textSize="20sp"
-            android:text="+"
-            android:gravity="center"/>
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/input_viewpager"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="결과"
-        android:textSize="18sp"
-        android:fontFamily="@font/sebang_gothic_bold"
-        android:gravity="center"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"/>
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/result_viewpager"
-        android:layout_weight="1"/>
-
-
+    </ListView>
 
 </LinearLayout>
