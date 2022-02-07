@@ -12,11 +12,13 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class SymptomInput extends AppCompatActivity {
 
-    Button btnDone, btnRemove;
+    Button btnDone;
+    ImageButton btnRemoveText;
     EditText editText;
     String text;
 
@@ -26,7 +28,7 @@ public class SymptomInput extends AppCompatActivity {
         setContentView(R.layout.activity_symptom_input);
 
         btnDone = (Button) findViewById(R.id.btn_done);
-        btnRemove = (Button) findViewById(R.id.btn_remove);
+        btnRemoveText = (ImageButton) findViewById(R.id.btn_removetext);
         editText = (EditText) findViewById(R.id.edittext);
 
         btnDone.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +51,8 @@ public class SymptomInput extends AppCompatActivity {
             }
         });
 
-        btnRemove.setOnClickListener(new View.OnClickListener() {
+
+        btnRemoveText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editText.setText(null);

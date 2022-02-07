@@ -36,19 +36,36 @@
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <EditText
-        android:id="@+id/edittext"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
-        android:scrollbars="vertical"
-        android:hint="@string/edit_hint"
-        android:fontFamily="@font/sebang_gothic"
-        android:paddingLeft="10dp"
-        android:background="@drawable/edit_round"
         android:layout_marginHorizontal="20dp"
-        />
+        android:orientation="vertical"
+        android:background="@drawable/edit_round"
+        android:padding="10dp">
+
+
+        <ImageButton
+            android:id="@+id/btn_removetext"
+            android:layout_width="26dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:background="@drawable/baseline_close_black_48" />
+
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:hint="@string/edit_hint"
+            android:fontFamily="@font/sebang_gothic"
+            android:paddingLeft="10dp"
+            />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,18 +73,19 @@
         android:orientation="horizontal"
         android:layout_marginHorizontal="20dp">
 
+
         <Button
-            android:id="@+id/btn_remove"
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button_remove"
-            android:background="@drawable/button_round"
+            android:layout_marginRight="5dp"
+            android:text="저장"
             android:fontFamily="@font/sebang_gothic_bold"
             android:textSize="15sp"
+            android:background="@drawable/button_round"
             android:letterSpacing="0.1"
-            android:layout_marginRight="5dp"/>
-
+            />
 
         <Button
             android:id="@+id/btn_done"
