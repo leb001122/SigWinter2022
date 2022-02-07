@@ -7,20 +7,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-public class LodingActivity extends AppCompatActivity {
+public class LoadingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loding);
+        setContentView(R.layout.activity_loading);
 
         Handler handler = new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                startActivity(new Intent(LodingActivity.this, MainActivity.class));
+                startActivity(new Intent(LoadingActivity.this, QuestionInputActivity.class));
                 finish();
             }
         };
-        handler.sendEmptyMessageDelayed(0, 1000); //3초후 화면 전환
+        handler.sendEmptyMessageDelayed(0, 1000); //1초후 화면 전환
+
     }
 }

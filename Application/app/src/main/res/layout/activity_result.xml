@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AiResult"
-    android:background="@color/main_color"
+    tools:context=".ResultActivity"
+    android:background="@color/white"
     android:orientation="vertical"
     android:id="@+id/content">
 
@@ -38,22 +38,55 @@
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="처음 페이지"
-        android:background="@drawable/button_round2"
-        android:id="@+id/btn_firstPage"
-        android:fontFamily="@font/sebang_gothic"
-        android:textSize="15sp"
-        android:layout_marginHorizontal="20dp"/>
+
 
     <androidx.viewpager.widget.ViewPager
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:id="@+id/viewpager"
         android:layout_marginTop="20dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewpager"/>
+        android:paddingTop="10dp">
+
+        <ImageButton
+            android:id="@+id/btn_firstpage"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/baseline_first_page_black_36"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="좌우로 스와이프"
+            android:fontFamily="@font/sebang_gothic"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_firstpage"
+            app:layout_constraintEnd_toStartOf="@id/btn_lastpage"
+            android:layout_marginTop="7dp"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_lastpage"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/outline_last_page_black_36"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </LinearLayout>

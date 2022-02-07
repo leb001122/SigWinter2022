@@ -10,16 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SigApplication">
         <activity
-            android:name=".AiResult"
+            android:name=".ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".SymptomInput"
+            android:name=".QuestionInputActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LodingActivity"
+            android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
