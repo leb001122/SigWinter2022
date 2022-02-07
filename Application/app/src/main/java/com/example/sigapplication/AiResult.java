@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,14 @@ public class AiResult extends AppCompatActivity {
         adapter.addItem(fragment3);
 
         pager.setAdapter(adapter);
+
+        Button btnFirstPage = findViewById(R.id.btn_firstPage);
+        btnFirstPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pager.setCurrentItem(0);
+            }
+        });
     }
 
     class PagerAdapter extends FragmentStatePagerAdapter {
