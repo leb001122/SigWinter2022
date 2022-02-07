@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.238671875" />
         <entry key="app/src/main/res/layout-w1240dp/fragment_result2.xml" value="0.107095046854083" />
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.23125" />
-        <entry key="app/src/main/res/layout/activity_ai_result.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_ai_result.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_loding.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/fragment_third.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/page1.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/layout/question_list.xml" value="0.2" />
         <entry key="app/src/main/res/layout/test.xml" value="0.30833333333333335" />
       </map>
     </option>

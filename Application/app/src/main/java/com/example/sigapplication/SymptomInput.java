@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class SymptomInput extends AppCompatActivity {
 
-    Button btnDone;
+    Button btnDone, btnSave;
     ImageButton btnRemoveText;
     EditText editText;
     String text;
@@ -28,13 +28,16 @@ public class SymptomInput extends AppCompatActivity {
         setContentView(R.layout.activity_symptom_input);
 
         btnDone = (Button) findViewById(R.id.btn_done);
+        btnSave = (Button) findViewById(R.id.btn_save);
         btnRemoveText = (ImageButton) findViewById(R.id.btn_removetext);
         editText = (EditText) findViewById(R.id.edittext);
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 text = editText.getText().toString();
+
                 if (text.length() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
@@ -51,6 +54,27 @@ public class SymptomInput extends AppCompatActivity {
             }
         });
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                text = editText.getText().toString();
+
+                if (text.length() == 0) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
+                    toast.show();
+                }
+                else {
+                    // db에 저장
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "저장 완료", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
+                    toast.show();
+                }
+
+            }
+        });
 
         btnRemoveText.setOnClickListener(new View.OnClickListener() {
             @Override
