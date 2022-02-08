@@ -1,84 +1,56 @@
 package com.example.sigapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements DiseaseTitlesFragment.OnTitleSelectedListener{
 
-    private static final int NUM_PAGES = 3;
-    ViewPager viewPager;
-    ImageButton btnFirstPage, btnLastPage;
-    PagerAdapter adapter;
+    final String[][] contents = new String[3][2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.content_result);
 
-        btnFirstPage = findViewById(R.id.btn_firstpage);
-        btnLastPage = findViewById(R.id.btn_lastpage);
-        viewPager = findViewById(R.id.viewpager);
-        viewPager.setOffscreenPageLimit(NUM_PAGES);
-        adapter = new PagerAdapter(getSupportFragmentManager());
 
-        Fragment1 fragment1 = new Fragment1();
-        adapter.addItem(fragment1);
-        Fragment2 fragment2 = new Fragment2();
-        adapter.addItem(fragment2);
-        Fragment3 fragment3 = new Fragment3();
-        adapter.addItem(fragment3);
+        contents[0][0] = "감기";
+        contents[0][1] = "감기가 뭐냐면 말이야...";
+        contents[1][0] = "감기2";
+        contents[1][1] = "감기2가 뭐냐면 말이야...";
+        contents[2][0] = "감기3";
+        contents[2][1] = "감기3가 뭐냐면 말이야...";
 
-        viewPager.setAdapter(adapter);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, new ArrayList());
 
-        btnFirstPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewPager.setCurrentItem(0);
-            }
-        });
+        adapter.add(contents[0][0]);
+        adapter.add(contents[1][0]);
+        adapter.add(contents[2][0]);
 
-        btnLastPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewPager.setCurrentItem(NUM_PAGES-1);
-            }
-        });
+        DiseaseTitlesFragment titlesFragment = (DiseaseTitlesFragment) getSupportFragmentManager().findFragmentById(R.id.titles_fragment);
+        titlesFragment.setListAdapter(adapter);
+
+
     }
 
-    class PagerAdapter extends FragmentStatePagerAdapter {
-        ArrayList<Fragment> items = new ArrayList<Fragment>();
+    public void onTitleSelected(int position) {
+        Intent intent = new Intent();
+        intent.setClass(this, DiseaseDetailsActivity.class);
 
-        public PagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        public void addItem(Fragment item) {
-            items.add(item);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return items.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return items.size();
-        }
+        intent.putExtra("title", contents[position][0]);
+        intent.putExtra("details", contents[position][1]);
+        startActivity(intent);
     }
 }

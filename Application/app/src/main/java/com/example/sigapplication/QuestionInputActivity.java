@@ -43,7 +43,6 @@ public class QuestionInputActivity extends AppCompatActivity {
                 else {
                     // 글자수 제한 및 특정 글자수 입력해야 넘어가도록
                     Intent intent = new Intent(QuestionInputActivity.this, ResultActivity.class);
-                    intent.putExtra("question", text);
                     startActivity(intent);
 
                 }

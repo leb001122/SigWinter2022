@@ -13,6 +13,9 @@
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
+            android:name=".DiseaseDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuestionInputActivity"
             android:exported="false" />
         <activity
