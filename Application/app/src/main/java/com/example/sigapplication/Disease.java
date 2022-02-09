@@ -1,12 +1,10 @@
 package com.example.sigapplication;
 
 public class Disease {
-    int id;
-    String diseaseName;
-    String description;
+    private String diseaseName;
+    private String description;
 
-    public Disease(int id, String dName, String description) {
-        this.id = id;
+    public Disease(String dName, String description) {
         this.diseaseName = dName;
         this.description = description;
     }

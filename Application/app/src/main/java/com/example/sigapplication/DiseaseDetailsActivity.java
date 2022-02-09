@@ -16,10 +16,10 @@ public class DiseaseDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        TextView titleTextView = (TextView) findViewById(R.id.selectedTitle);
-        titleTextView.setText(intent.getExtras().getString("title"));
+        TextView titleTextView = (TextView) findViewById(R.id.disease_name);
+        titleTextView.setText(intent.getStringExtra("diseaseName"));
 
-        TextView detailsTextView = (TextView) findViewById(R.id.detailsText);
-        detailsTextView.setText(intent.getExtras().getString("details"));
+        TextView detailsTextView = (TextView) findViewById(R.id.description);
+        detailsTextView.setText(intent.getStringExtra("description"));
     }
 }

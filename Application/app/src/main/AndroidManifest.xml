@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sigapplication">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SigApplication">
         <activity
-            android:name=".ResultActivity"
-            android:exported="false" />
-        <activity
             android:name=".DiseaseDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".QuestionInputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DiseaseListActivity"
             android:exported="false" />
         <activity
             android:name=".LoadingActivity"
