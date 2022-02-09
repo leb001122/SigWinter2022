@@ -10,8 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DiseaseAdapter extends BaseAdapter {
+
+    private ArrayList<Disease> diseases;
     LayoutInflater inflater;
-    ArrayList<Disease> diseases;
     int layout;
 
     public DiseaseAdapter(Context context, int layout, ArrayList<Disease> diseases) {
@@ -41,7 +42,6 @@ public class DiseaseAdapter extends BaseAdapter {
             view = inflater.inflate(layout, parent, false);
         }
         Disease disease = diseases.get(position);
-
         TextView diseaseName = (TextView) view.findViewById(R.id.textview);
         diseaseName.setText(disease.getDiseaseName());
 

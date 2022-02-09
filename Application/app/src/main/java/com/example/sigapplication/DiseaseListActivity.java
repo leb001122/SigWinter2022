@@ -21,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -33,9 +34,9 @@ import java.util.Map;
 public class DiseaseListActivity extends Activity implements View.OnClickListener {
     private ArrayList<Disease> diseases;
     private ListView listView;
-    static RequestQueue queue;
-    DiseaseAdapter adapter;
-    String url = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&amp;targetDt=20120101";
+    private RequestQueue queue;
+    private DiseaseAdapter adapter;
+    private String url;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +45,13 @@ public class DiseaseListActivity extends Activity implements View.OnClickListene
 
         listView = (ListView) findViewById(R.id.disease_listview);
         diseases = new ArrayList<>();
+        queue = Volley.newRequestQueue(getApplicationContext());
+        url = "https://5c87-210-218-158-162.ngrok.io/appServer";
 
         // 서버에서 데이터 받아옴
         request(url);
-
-/*        JsonObject jsonObject = new JsonObject();
+/*
+        JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("diseaseName", "감기");
         jsonObject.addProperty("description", "감기란 말이야");
         JsonObject jsonObject2 = new JsonObject();
@@ -62,6 +65,7 @@ public class DiseaseListActivity extends Activity implements View.OnClickListene
 
         adapter = new DiseaseAdapter(this, R.layout.result_item, diseases);
         listView.setAdapter(adapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -93,12 +97,7 @@ public class DiseaseListActivity extends Activity implements View.OnClickListene
                     }
                 }
 
-        ) {
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
+        );
         request.setShouldCache(false);
         queue.add(request);
         Log.d("로그 : ", "요청 보냄");

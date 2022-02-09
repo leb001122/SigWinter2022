@@ -28,7 +28,8 @@
         android:textSize="18sp"
         android:textColor="@color/black"
         android:fontFamily="@font/sebang_gothic"
-        android:text="text for DETAILS"/>
+        android:text="text for DETAILS"
+        android:scrollbars="vertical"/>
 
 
 </LinearLayout>
