@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">질환보감</string>
-    <string name="button_done">결과확인</string>
+    <string name="button_done">결과 확인</string>
     <string name="toast_or_hint">증상을 입력하세요.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="banner">어떤 곳이 어떻게 아프신가요? \n 무슨 질환인지 알려드릴게요</string>
+    <string name="banner2">예상 질병 목록입니다.</string>
+
 </resources>

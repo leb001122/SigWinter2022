@@ -6,12 +6,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,7 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,9 +36,11 @@ public class QuestionInputActivity extends AppCompatActivity {
     private Button btnSend;
     private ImageButton btnClear;
     private EditText editText;
-    private String text;
-    private RequestQueue queue;
+    private TextView inputCounter;
+    private String inputText;
     private String url;
+    private ArrayList<Disease> diseases;
+    static RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,27 +50,47 @@ public class QuestionInputActivity extends AppCompatActivity {
         btnSend = (Button)findViewById(R.id.btn_send);
         btnClear = (ImageButton) findViewById(R.id.btn_clear);
         editText = (EditText) findViewById(R.id.edittext);
+        inputCounter = (TextView) findViewById(R.id.textinput_counter);
         queue = Volley.newRequestQueue(getApplicationContext());
-        url = "https://5c87-210-218-158-162.ngrok.io/appServer";
+        url = "https://ca59-210-218-158-162.ngrok.io/appServer/post";
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                String tmpStr = editText.getText().toString();
+                inputCounter.setText(tmpStr.length() + "/128");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text = editText.getText().toString();
+                inputText = editText.getText().toString();
+                System.out.println(inputText);
 
-                if (text.length() == 0) {
+                if (inputText.length() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
                     toast.show();
                     return;
                 }
-                // 글자수 제한 및 특정 글자수 입력해야 넘어가도록
-
                 request(url);
+
+                System.out.println(diseases.get(0).getDiseaseName());
+
                 Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
+                intent.putExtra("diseaseList", diseases);
                 startActivity(intent);
             }
-
         });
 
 
@@ -82,6 +110,7 @@ public class QuestionInputActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.d("응답 -> ", response);
+                        response(response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -94,14 +123,38 @@ public class QuestionInputActivity extends AppCompatActivity {
         ) {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("input", editText.getText().toString());
+                params.put("symptom", editText.getText().toString());
                 return params;
             }
         };
-        request.setShouldCache(false);
+        request.setShouldCache(false); //이전 응답 결과를 사용하지 않음
         queue.add(request);
         Log.d("로그 : ", "요청 보냄");
     }
+
+    public void response(String jsonData) {
+        Gson gson = new Gson();
+
+        diseases = gson.fromJson(jsonData, new TypeToken<ArrayList<Disease>>(){}.getType());
+
+        try {
+            int cnt = diseases.size();
+            System.out.println("질병개수 : " + cnt);
+
+        } catch (NullPointerException e) {
+           Log.d("로그", "nullpointerexception");
+        }
+
+
+        for (int i=0; i<5; i++) {
+            System.out.println(diseases.get(i).getDiseaseName());
+            System.out.println(diseases.get(i).getDescription());
+            System.out.println();
+        }
+    }
+
+
+
 
     @Override
     protected void onPause() {

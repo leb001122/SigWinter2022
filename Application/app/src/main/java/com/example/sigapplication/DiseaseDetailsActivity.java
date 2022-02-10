@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DiseaseDetailsActivity extends AppCompatActivity {
 
+    private TextView titleTextView, descriptionTextView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,10 +18,10 @@ public class DiseaseDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        TextView titleTextView = (TextView) findViewById(R.id.disease_name);
-        titleTextView.setText(intent.getStringExtra("diseaseName"));
+        titleTextView = (TextView) findViewById(R.id.disease_name);
+        descriptionTextView = (TextView) findViewById(R.id.description);
 
-        TextView detailsTextView = (TextView) findViewById(R.id.description);
-        detailsTextView.setText(intent.getStringExtra("description"));
+        titleTextView.setText(intent.getStringExtra("diseaseName"));
+        descriptionTextView.setText(intent.getStringExtra("description"));
     }
 }

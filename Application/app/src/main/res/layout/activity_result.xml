@@ -38,11 +38,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="... 에 대한 예상 질병 목록입니다."
+        android:text="@string/banner2"
         android:fontFamily="@font/sebang_gothic"
         android:gravity="center"
         android:textSize="20sp"
         android:layout_margin="20dp"/>
+
     <ListView
         android:id="@+id/disease_listview"
         android:layout_width="match_parent"

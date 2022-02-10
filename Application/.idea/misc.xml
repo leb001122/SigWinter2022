@@ -25,7 +25,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.30833333333333335" />
-        <entry key="app/src/main/res/layout/activity_question_input.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_question_input.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_result.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_symptom_input.xml" value="0.2616349721032686" />
         <entry key="app/src/main/res/layout/content_result.xml" value="0.1979933110367893" />
@@ -41,7 +41,7 @@
         <entry key="app/src/main/res/layout/fragment_third.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/page1.xml" value="0.30833333333333335" />
         <entry key="app/src/main/res/layout/question_list.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/result_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/result_details.xml" value="0.21508983873146" />
         <entry key="app/src/main/res/layout/result_item.xml" value="0.16" />
         <entry key="app/src/main/res/layout/test.xml" value="0.30833333333333335" />
       </map>
