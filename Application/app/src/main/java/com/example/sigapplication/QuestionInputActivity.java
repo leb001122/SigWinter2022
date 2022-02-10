@@ -54,16 +54,17 @@ public class QuestionInputActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
                     toast.show();
+                    return;
                 }
-                else {
-                    // 글자수 제한 및 특정 글자수 입력해야 넘어가도록
-                    request(url);
-                    Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
-                    startActivity(intent);
+                // 글자수 제한 및 특정 글자수 입력해야 넘어가도록
 
-                }
+                request(url);
+                Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
+                startActivity(intent);
             }
+
         });
+
 
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
