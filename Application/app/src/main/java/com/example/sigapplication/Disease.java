@@ -3,9 +3,14 @@ package com.example.sigapplication;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Disease implements Parcelable {
+    @SerializedName("id")
     private int id;
+    @SerializedName("diseaseName")
     private String diseaseName;
+    @SerializedName("description")
     private String description;
 
     public Disease(int id, String dName, String description) {
@@ -30,6 +35,11 @@ public class Disease implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public String toString() {
+        return "질환명 = " + diseaseName +
+                "설명 = " + description + "\n" ;
     }
 
     public static final Creator<Disease> CREATOR = new Creator<Disease>() {

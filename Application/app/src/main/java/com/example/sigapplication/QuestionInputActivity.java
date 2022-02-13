@@ -1,11 +1,13 @@
 package com.example.sigapplication;
 
+import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,7 +22,6 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -31,13 +32,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class QuestionInputActivity extends AppCompatActivity {
 
@@ -48,7 +57,9 @@ public class QuestionInputActivity extends AppCompatActivity {
     private String inputText;
     private String url;
     private ArrayList<Disease> diseases;
-    static RequestQueue queue;
+    private MyAPI myAPI;
+    final String TAG = getClass().getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +70,9 @@ public class QuestionInputActivity extends AppCompatActivity {
         btnClear = (ImageButton) findViewById(R.id.btn_clear);
         editText = (EditText) findViewById(R.id.edittext);
         inputCounter = (TextView) findViewById(R.id.textinput_counter);
-        queue = Volley.newRequestQueue(getApplicationContext());
-        url = "https://e031-210-218-158-162.ngrok.io/appServer/post";
+        url = "https://e031-210-218-158-162.ngrok.io/";
+
+        initMyAPI(url);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,55 +92,47 @@ public class QuestionInputActivity extends AppCompatActivity {
         });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputText = editText.getText().toString();
+           @Override
+           public void onClick(View view) {
+               inputText = editText.getText().toString();
 
-                if (inputText.length() == 0) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
-                    toast.show();
-                    return;
-                }
-                //request(url);
-             /*JsonObject jsonObject = new JsonObject();
-             jsonObject.addProperty("diseaseName", "감기");
-             jsonObject.addProperty("description", "감기란 말이야");
-             JsonObject jsonObject2 = new JsonObject();
-             jsonObject2.addProperty("diseaseName", "독감");
-             jsonObject2.addProperty("description", "독감이란 말이야");
-             JsonArray jsonArray = new JsonArray();
-             jsonArray.add(jsonObject);
-             jsonArray.add(jsonObject2);
-             response(jsonArray.toString());
-             System.out.println(jsonArray.toString());*/
+               if (inputText.length() == 0) {
+                   Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
+                   toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 70);
+                   toast.show();
+                   return;
+               }
 
-                Map<String, String> params = new HashMap<>();
-                params.put("symptom", editText.getText().toString());
+               Call<List<Disease>> call = myAPI.postDisease(inputText);
+               call.enqueue(new Callback<List<Disease>>() {
 
-                CustomRequest jsObjRequest = new CustomRequest(Request.Method.POST, url, params,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("응답 -> ", response.toString());
-                            response(response);
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("에러", error.toString());
-                        }
-                    });
+                   @Override
+                   public void onResponse(Call<List<Disease>> call, Response<List<Disease>> response) {
+                       List<Disease> diseases = response.body();
+                       System.out.println("개수 : " + diseases.size());
+                       for (Disease disease : diseases) {
+                           System.out.print(disease.toString());
+                       }
 
-                queue.add(jsObjRequest);
+                       Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
+                       intent.putExtra("diseaseList", (ArrayList) diseases);
+                       startActivity(intent);
 
-                Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
-                intent.putExtra("diseaseList", diseases);
-                startActivity(intent);
-            }
-        });
+/*                       if (response.isSuccessful()) {
 
+                       }
+                       else {
+                           Log.d(TAG, "Status Code : " + response.code());
+                       }*/
+                   }
+
+                   @Override
+                   public void onFailure(Call<List<Disease>> call, Throwable t) {
+                       Log.e(TAG, "Fail msg : " + t.getMessage());
+                   }
+               });
+           }
+       });
 
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,64 +142,16 @@ public class QuestionInputActivity extends AppCompatActivity {
         });
     }
 
-    /*public void request(String url) {
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("응답 -> ", response);
-                        response(response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("에러", error.toString());
-                    }
-                }
+    private void initMyAPI(String url) {
 
-        ) {*//*
-            public byte[] getBody() throws AuthFailureError {
-                return editText.getText().toString().getBytes(StandardCharsets.UTF_8);
-            }*//*
-            protected Map<String, String> getParams() throws AuthFailureError {
-                System.out.println(editText.getText().toString());
+        Log.d(TAG, "initMyAPI : " + url);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-                Map<String, String> params = new HashMap<>();
-                params.put("symptom", editText.getText().toString());
-                Log.d("로그", "전송 완료");
-                return params;
-            }
-        };
-     //   request.setShouldCache(false); //이전 응답 결과를 사용하지 않음
-        queue.add(request);
-        Log.d("로그 : ", "요청 보냄");
-    }*/
-
-    public void response(Orde jsonData) {
-        Gson gson = new Gson();
-
-        diseases = gson.fromJson(String.valueOf(jsonData), new TypeToken<ArrayList<Disease>>(){}.getType());
-
-        try {
-            int cnt = diseases.size();
-            System.out.println("질병개수 : " + cnt);
-
-        } catch (NullPointerException e) {
-           Log.d("로그", "nullpointerexception");
-        }
-
-/*
-        for (int i=0; i<5; i++) {
-            System.out.println(diseases.get(i).getDiseaseName());
-            System.out.println(diseases.get(i).getDescription());
-            System.out.println();
-        }*/
+        myAPI = retrofit.create(MyAPI.class);
     }
-
-
 
 
     @Override
