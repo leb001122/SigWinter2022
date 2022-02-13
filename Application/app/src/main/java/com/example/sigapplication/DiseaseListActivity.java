@@ -24,8 +24,6 @@ public class DiseaseListActivity extends Activity implements View.OnClickListene
         Intent intent = getIntent();
         diseases = intent.getParcelableArrayListExtra("diseaseList");
 
-        System.out.println(diseases.get(0).getDiseaseName());
-
         adapter = new DiseaseAdapter(this, R.layout.result_item, diseases);
         listView.setAdapter(adapter);
 

@@ -22,11 +22,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +60,7 @@ public class QuestionInputActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.edittext);
         inputCounter = (TextView) findViewById(R.id.textinput_counter);
         queue = Volley.newRequestQueue(getApplicationContext());
-        url = "https://ca59-210-218-158-162.ngrok.io/appServer/post";
+        url = "https://e031-210-218-158-162.ngrok.io/appServer/post";
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,7 +83,6 @@ public class QuestionInputActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 inputText = editText.getText().toString();
-                System.out.println(inputText);
 
                 if (inputText.length() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "증상을 입력하세요.", Toast.LENGTH_SHORT);
@@ -83,9 +90,38 @@ public class QuestionInputActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                request(url);
+                //request(url);
+             /*JsonObject jsonObject = new JsonObject();
+             jsonObject.addProperty("diseaseName", "감기");
+             jsonObject.addProperty("description", "감기란 말이야");
+             JsonObject jsonObject2 = new JsonObject();
+             jsonObject2.addProperty("diseaseName", "독감");
+             jsonObject2.addProperty("description", "독감이란 말이야");
+             JsonArray jsonArray = new JsonArray();
+             jsonArray.add(jsonObject);
+             jsonArray.add(jsonObject2);
+             response(jsonArray.toString());
+             System.out.println(jsonArray.toString());*/
 
-                System.out.println(diseases.get(0).getDiseaseName());
+                Map<String, String> params = new HashMap<>();
+                params.put("symptom", editText.getText().toString());
+
+                CustomRequest jsObjRequest = new CustomRequest(Request.Method.POST, url, params,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("응답 -> ", response.toString());
+                            response(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("에러", error.toString());
+                        }
+                    });
+
+                queue.add(jsObjRequest);
 
                 Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
                 intent.putExtra("diseaseList", diseases);
@@ -102,8 +138,8 @@ public class QuestionInputActivity extends AppCompatActivity {
         });
     }
 
-    public void request(String url) {
-        StringRequest request = new StringRequest(
+    /*public void request(String url) {
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
@@ -116,26 +152,32 @@ public class QuestionInputActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("에러", error.toString());
+                        Log.e("에러", error.toString());
                     }
                 }
 
-        ) {
+        ) {*//*
+            public byte[] getBody() throws AuthFailureError {
+                return editText.getText().toString().getBytes(StandardCharsets.UTF_8);
+            }*//*
             protected Map<String, String> getParams() throws AuthFailureError {
+                System.out.println(editText.getText().toString());
+
                 Map<String, String> params = new HashMap<>();
                 params.put("symptom", editText.getText().toString());
+                Log.d("로그", "전송 완료");
                 return params;
             }
         };
-        request.setShouldCache(false); //이전 응답 결과를 사용하지 않음
+     //   request.setShouldCache(false); //이전 응답 결과를 사용하지 않음
         queue.add(request);
         Log.d("로그 : ", "요청 보냄");
-    }
+    }*/
 
-    public void response(String jsonData) {
+    public void response(Orde jsonData) {
         Gson gson = new Gson();
 
-        diseases = gson.fromJson(jsonData, new TypeToken<ArrayList<Disease>>(){}.getType());
+        diseases = gson.fromJson(String.valueOf(jsonData), new TypeToken<ArrayList<Disease>>(){}.getType());
 
         try {
             int cnt = diseases.size();
@@ -145,12 +187,12 @@ public class QuestionInputActivity extends AppCompatActivity {
            Log.d("로그", "nullpointerexception");
         }
 
-
+/*
         for (int i=0; i<5; i++) {
             System.out.println(diseases.get(i).getDiseaseName());
             System.out.println(diseases.get(i).getDescription());
             System.out.println();
-        }
+        }*/
     }
 
 
