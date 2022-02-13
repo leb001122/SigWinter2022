@@ -108,14 +108,14 @@ public class QuestionInputActivity extends AppCompatActivity {
 
                    @Override
                    public void onResponse(Call<List<Disease>> call, Response<List<Disease>> response) {
-                       List<Disease> diseases = response.body();
+                       diseases = (ArrayList<Disease>) response.body();
                        System.out.println("개수 : " + diseases.size());
                        for (Disease disease : diseases) {
                            System.out.print(disease.toString());
                        }
 
                        Intent intent = new Intent(QuestionInputActivity.this, DiseaseListActivity.class);
-                       intent.putExtra("diseaseList", (ArrayList) diseases);
+                       intent.putExtra("diseaseList", diseases);
                        startActivity(intent);
 
 /*                       if (response.isSuccessful()) {
